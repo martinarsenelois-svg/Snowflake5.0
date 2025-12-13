@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pulse Chat</title>
+  <title>Snowflake Chat</title>
 
   <meta name="theme-color" content="#0b141a"/>
 
@@ -13,43 +13,47 @@
 
   <link rel="stylesheet" href="style.css"/>
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+  <!-- 🔥 FIREBASE COMPAT (CRITICAL) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
 </head>
 
 <body>
 
-<!-- AUTH -->
-<section id="auth" class="screen active">
-  <div class="card">
-    <h1>Pulse</h1>
-    <input id="email" placeholder="Email">
+<!-- ================= AUTH ================= -->
+<section id="authScreen" class="screen active">
+  <div class="auth-box">
+    <h1>Snowflake</h1>
+    <p>Private 1-on-1 chat</p>
+
+    <input id="email" type="email" placeholder="Email">
     <input id="password" type="password" placeholder="Password">
+
     <button onclick="login()">Login</button>
-    <button class="ghost" onclick="signup()">Create account</button>
+    <button class="secondary" onclick="signup()">Create account</button>
   </div>
 </section>
 
-<!-- CHAT -->
-<section id="chat" class="screen">
-  <header>
+<!-- ================= CHAT ================= -->
+<section id="chatScreen" class="screen">
+  <header class="chat-header">
     <div>
-      <strong id="peerName">Chat</strong><br>
-      <small id="status">offline</small>
+      <div id="chatName">Chat</div>
+      <div id="chatStatus">offline</div>
     </div>
     <span class="material-icons" onclick="logout()">logout</span>
   </header>
 
   <main id="messages"></main>
 
-  <footer>
-    <input id="text" placeholder="Message">
-    <button onclick="send()">➤</button>
+  <footer class="input-bar">
+    <input id="messageInput" placeholder="Message">
+    <button onclick="sendMessage()">➤</button>
   </footer>
 </section>
 
 <script src="app.js"></script>
 </body>
-    </html>
+</html>

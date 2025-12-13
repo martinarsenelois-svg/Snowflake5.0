@@ -1,6 +1,9 @@
+/* =========================
+   GLOBAL
+========================= */
 * {
   box-sizing: border-box;
-  font-family: Inter, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 body {
@@ -8,11 +11,13 @@ body {
   background: #0b141a;
   color: #e9edef;
   height: 100vh;
+  overflow: hidden;
 }
 
 .screen {
   display: none;
   height: 100vh;
+  width: 100vw;
 }
 
 .screen.active {
@@ -20,87 +25,170 @@ body {
   flex-direction: column;
 }
 
-.card {
+/* =========================
+   AUTH SCREEN
+========================= */
+.auth-box {
   margin: auto;
+  width: 90%;
+  max-width: 360px;
   background: #111b21;
   padding: 2rem;
   border-radius: 18px;
-  width: 90%;
-  max-width: 360px;
   text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,.6);
 }
 
-h1 {
-  margin-bottom: 1rem;
+.auth-box h1 {
+  margin: 0;
+  font-size: 2rem;
 }
 
-input {
+.auth-box p {
+  color: #8696a0;
+  margin-bottom: 1.5rem;
+}
+
+.auth-box input {
   width: 100%;
-  padding: 12px;
-  margin: 6px 0;
+  padding: 12px 14px;
+  margin-bottom: 10px;
   border-radius: 12px;
   border: none;
   background: #0b141a;
   color: #fff;
+  font-size: 15px;
 }
 
-button {
+.auth-box button {
   width: 100%;
   padding: 12px;
   border-radius: 12px;
   border: none;
   background: #00a884;
-  margin-top: 8px;
+  color: #000;
   font-weight: 600;
+  margin-top: 6px;
+  font-size: 15px;
 }
 
-button.ghost {
+.auth-box button.secondary {
   background: none;
   color: #8696a0;
 }
 
-header {
+/* =========================
+   CHAT HEADER
+========================= */
+.chat-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 12px 14px;
   background: #111b21;
+  border-bottom: 1px solid #1f2c33;
 }
 
-main {
+#chatName {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+#chatStatus {
+  font-size: 12px;
+  color: #8696a0;
+}
+
+.chat-header .material-icons {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* =========================
+   MESSAGES
+========================= */
+#messages {
   flex: 1;
-  padding: 1rem;
+  padding: 12px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.msg {
-  max-width: 70%;
-  padding: 10px 14px;
+.message {
+  max-width: 75%;
+  padding: 8px 12px;
   border-radius: 16px;
-  margin-bottom: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.message.in {
+  background: #1f2c33;
+  align-self: flex-start;
+}
+
+.message.out {
+  background: #005c4b;
+  align-self: flex-end;
+}
+
+.meta {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #cfd4d7;
+}
+
+.seen {
+  color: #53bdeb;
+}
+
+/* =========================
+   INPUT BAR
+========================= */
+.input-bar {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: #111b21;
+  border-top: 1px solid #1f2c33;
+}
+
+#messageInput {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  background: #0b141a;
+  color: #fff;
   font-size: 14px;
 }
 
-.in {
-  background: #1f2c33;
+.input-bar button {
+  width: 42px;
+  height: 42px;
+  margin-left: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #00a884;
+  color: #000;
+  font-size: 18px;
 }
 
-.out {
-  background: #005c4b;
-  margin-left: auto;
+/* =========================
+   SCROLLBAR (MINIMAL)
+========================= */
+#messages::-webkit-scrollbar {
+  width: 3px;
 }
 
-footer {
-  display: flex;
-  padding: 0.5rem;
-  background: #111b21;
+#messages::-webkit-scrollbar-thumb {
+  background: #3b4a54;
+  border-radius: 10px;
 }
-
-footer input {
-  flex: 1;
-}
-
-footer button {
-  width: 50px;
-  margin-left: 6px;
-  }
