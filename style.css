@@ -1,159 +1,291 @@
-:root{
-  --accent:#7e57c2;
-  --bg:#eef2ff;
-  --card:rgba(255,255,255,.9);
-  --dark:#0b1220;
-  --radius:16px;
+/* ----------------------------------------
+   GLOBAL RESET + BASE UI
+---------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-*{box-sizing:border-box}
-html,body{margin:0;height:100%;font-family:system-ui}
-body{
-  background:linear-gradient(135deg,#c7d2fe,#a78bfa);
-  display:flex;
-  justify-content:center;
-  color:#111;
+body {
+  font-family: system-ui, -apple-system, Roboto, sans-serif;
+  background: #ffffff;
+  color: #222;
+  height: 100vh;
+  overflow: hidden;
 }
 
-body.dark{
-  background:linear-gradient(180deg,#020617,#020617);
-  color:#e5e7eb;
+/* Prevent scrolling bounce issues */
+html, body {
+  overscroll-behavior: none;
 }
 
-canvas#snow{position:fixed;inset:0;pointer-events:none}
-
-.appbar{
-  position:fixed;
-  top:12px;
-  width:95%;
-  max-width:900px;
-  background:var(--card);
-  backdrop-filter:blur(10px);
-  border-radius:var(--radius);
-  padding:12px 16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:10;
+/* Hidden utility */
+.hidden {
+  display: none !important;
 }
 
-body.dark .appbar{background:rgba(10,10,20,.8)}
-
-.app-left{display:flex;gap:12px;align-items:center}
-.avatar{width:44px;height:44px;border-radius:12px}
-.app-title{font-weight:700}
-.app-sub{font-size:12px;opacity:.7}
-
-.app-right button{
-  background:none;border:none;font-size:18px;cursor:pointer
+/* ----------------------------------------
+   TOPBAR
+---------------------------------------- */
+.topbar {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  position: relative;
+  z-index: 20;
 }
 
-.card{
-  margin-top:120px;
-  background:var(--card);
-  padding:24px;
-  border-radius:var(--radius);
-  width:90%;
-  max-width:360px;
+.topbar .left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.topbar img {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+.topbar .title {
+  font-weight: 600;
+  font-size: 16px;
 }
 
-.center{text-align:center}
-
-.primary{
-  background:var(--accent);
-  color:white;
-  border:none;
-  padding:10px 14px;
-  border-radius:10px;
-  cursor:pointer;
+.topbar .right button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  padding: 4px;
+  cursor: pointer;
 }
 
-.error{color:#dc2626;margin-top:8px}
-
-.drawer{
-  position:fixed;
-  right:12px;
-  top:90px;
-  width:260px;
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:16px;
-  z-index:12;
+/* ----------------------------------------
+   PANELS (Login + Settings)
+---------------------------------------- */
+.panel {
+  background: #fff;
+  padding: 18px;
+  border-radius: 10px;
+  width: 92%;
+  max-width: 420px;
+  margin: 20px auto;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
 
-.hidden{display:none}
-
-main{
-  margin-top:90px;
-  width:95%;
-  max-width:900px;
-  display:flex;
-  flex-direction:column;
-  height:calc(100vh - 110px);
+.center {
+  margin-top: 80px;
+  text-align: center;
 }
 
-.messages{
-  flex:1;
-  overflow:auto;
-  padding:16px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
+.panel input, .panel select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin: 6px 0;
+  font-size: 14px;
 }
 
-.msg{
-  max-width:75%;
-  padding:12px;
-  border-radius:14px;
-  animation:fade .15s;
+.panel button {
+  padding: 9px 14px;
+  border-radius: 8px;
+  background: #4f8df7;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-.msg.me{
-  margin-left:auto;
-  background:linear-gradient(180deg,var(--accent),#5b3ea6);
-  color:white;
+.panel .row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
 }
 
-.msg.other{
-  background:white;
+.error {
+  color: #e55;
+  font-size: 13px;
+  margin-top: 5px;
 }
 
-.meta{
-  font-size:11px;
-  opacity:.7;
-  margin-top:6px;
-  display:flex;
-  justify-content:space-between;
+/* ----------------------------------------
+   CHAT LAYOUT
+---------------------------------------- */
+#chat-screen {
+  position: fixed;
+  top: 52px;   /* below topbar */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 52px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.composer{
-  display:flex;
-  gap:8px;
-  padding:10px;
-  background:var(--card);
-  border-radius:14px;
+/* MESSAGES SCROLLER */
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.composer input{
-  flex:1;
-  border:none;
-  padding:10px;
-  border-radius:10px;
+/* Custom scroll */
+.messages::-webkit-scrollbar {
+  width: 6px;
+}
+.messages::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 4px;
 }
 
-.typing{font-size:12px;opacity:.6;padding:0 16px}
-
-#loader{
-  position:fixed;
-  bottom:30px;
-  background:black;
-  color:white;
-  padding:8px 14px;
-  border-radius:10px;
-  display:none;
+/* ----------------------------------------
+   ULTRA-MINIMAL CHAT BUBBLES
+---------------------------------------- */
+.msg {
+  max-width: 68%;
+  padding: 5px 8px;
+  font-size: 14px;
+  line-height: 1.25;
+  border-radius: 6px;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  width: fit-content;
+  white-space: pre-wrap;
 }
 
-@keyframes fade{
-  from{opacity:0;transform:translateY(6px)}
-  to{opacity:1}
+.me {
+  align-self: flex-end;
+  background: #e9f5ff;
+  border-color: #d2ecff;
+}
+
+.other {
+  align-self: flex-start;
+}
+
+.msg .meta {
+  margin-top: 3px;
+  font-size: 11px;
+  opacity: 0.55;
+}
+
+.msg button {
+  font-size: 13px;
+  padding: 2px 4px;
+  background: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* ----------------------------------------
+   COMPOSER (bottom input area)
+---------------------------------------- */
+.composer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.tool-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+#msg {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.send-btn {
+  background: #4f8df7;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  font-size: 14px;
+}
+
+/* ----------------------------------------
+   EMOJI DRAWER
+---------------------------------------- */
+.emoji-drawer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 46%;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+  z-index: 30;
+}
+
+.emoji-drawer.hidden {
+  display: none !important;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.drawer-title {
+  font-weight: 600;
+}
+
+.close-drawer {
+  background: none;
+  border: none;
+  font-size: 22px;
+}
+
+.emoji-container {
+  height: calc(100% - 70px);
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.drawer-footer {
+  font-size: 12px;
+  text-align: center;
+  padding: 6px;
+  color: #777;
+}
+
+/* ----------------------------------------
+  TYPING INDICATOR
+---------------------------------------- */
+.typing {
+  font-size: 12px;
+  opacity: 0.5;
+  padding: 4px 10px;
+}
+
+/* ----------------------------------------
+   SNOW CANVAS BACKGROUND (optional)
+---------------------------------------- */
+#snow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.15;
 }

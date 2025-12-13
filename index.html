@@ -1,75 +1,135 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Snowflake Chat</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snowflake Chat</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f5f5f5;
+}
+
+/* hide class for JS */
+.hidden { display: none; }
+
+/* LOGIN */
+#loginScreen {
+  padding: 20px;
+  max-width: 350px;
+  margin: 80px auto;
+  text-align: center;
+}
+
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+button {
+  background: #1a73e8;
+  color: white;
+  border: none;
+}
+
+/* CHAT */
+#chatScreen {
+  display: none;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+/* message bubbles */
+.msg {
+  max-width: 70%;
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 12px;
+  font-size: 15px;
+}
+
+.me { background: #d7edff; margin-left: auto; }
+.them { background: white; }
+
+.ts { font-size: 11px; opacity: .6; margin-top: 4px; }
+
+/* input bar */
+#input-area {
+  display: flex;
+  gap: 6px;
+  padding: 10px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+
+#msg {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+#sendBtn {
+  padding: 10px 16px;
+  border-radius: 20px;
+  background: #1a73e8;
+  color: white;
+  border: none;
+}
+</style>
 </head>
-<body>
 
-<canvas id="snow"></canvas>
+<body class="prelogin">
 
-<header class="appbar">
-  <div class="app-left">
-    <img class="avatar" src="https://api.dicebear.com/6.x/identicon/svg?seed=snow">
-    <div>
-      <div class="app-title">Snowflake Chat</div>
-      <div class="app-sub" id="onlineCount">Connecting…</div>
-    </div>
-  </div>
-  <div class="app-right">
-    <button id="theme-toggle">🌙</button>
-    <button id="open-settings">⚙️</button>
-  </div>
-</header>
-
-<section id="login-screen" class="card center">
-  <h2>Welcome ❄️</h2>
-  <p>Enter private password</p>
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <h2>Enter Password</h2>
   <input id="loginPass" type="password" placeholder="Password">
-  <button id="pwEnter" class="primary">Enter</button>
-  <p id="loginError" class="error"></p>
-</section>
+  <button id="pwEnter">Enter</button>
+  <div id="loginError" style="color:red;margin-top:8px;"></div>
+</div>
 
-<aside id="settings" class="drawer hidden">
+<!-- CHAT SCREEN -->
+<div id="chatScreen" class="hidden">
+
+  <div id="messages"></div>
+
+  <div id="input-area">
+    <button id="fileBtn">📎</button>
+    <button id="voiceBtn">🎤</button>
+    <button id="emojiBtn">😊</button>
+    <input id="msg" placeholder="Type a message...">
+    <button id="sendBtn">Send</button>
+  </div>
+
+</div>
+
+<!-- SETTINGS (required for your JS) -->
+<div id="settings" class="hidden">
   <h3>Settings</h3>
-  <label>
-    Disappearing messages
-    <select id="defaultTTL">
-      <option value="0">Off</option>
-      <option value="1">1 min</option>
-      <option value="5">5 min</option>
-      <option value="30">30 min</option>
-    </select>
-  </label>
+  <input id="nameInput" placeholder="Your name">
+  <button id="saveNameBtn">Save</button>
+  <button id="createLinkBtn">Create Link</button>
+  <input id="linkOut" readonly>
+</div>
 
-  <label>
-    Enable snow
-    <input type="checkbox" id="snowToggle" checked>
-  </label>
+<!-- FIREBASE + YOUR SCRIPT -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="app.js"></script>
 
-  <button id="logout" class="danger">Log out</button>
-  <button id="clear-chat-admin" class="danger">Clear chat</button>
-</aside>
-
-<main id="chat-screen" class="hidden">
-  <div id="messages" class="messages"></div>
-  <div id="typingIndicator" class="typing"></div>
-
-  <form class="composer" onsubmit="return false">
-    <input id="fileInput" type="file" hidden>
-    <button id="attach" type="button">📎</button>
-    <button id="record" type="button">🎙</button>
-    <input id="msg" placeholder="Type a message…">
-    <button id="send" class="primary">Send</button>
-  </form>
-</main>
-
-<div id="loader">Uploading…</div>
-
-<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-<script src="script.js"></script>
 </body>
 </html>
