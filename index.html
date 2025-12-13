@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Snowflake Chat</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snowflake</title>
 
-  <meta name="theme-color" content="#0b141a"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css"/>
-
-  <!-- 🔥 FIREBASE COMPAT (CRITICAL) -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<!-- Firebase COMPAT -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 
 <body>
 
-<!-- ================= AUTH ================= -->
 <section id="authScreen" class="screen active">
   <div class="auth-box">
     <h1>Snowflake</h1>
@@ -31,17 +25,18 @@
     <input id="email" type="email" placeholder="Email">
     <input id="password" type="password" placeholder="Password">
 
-    <button onclick="login()">Login</button>
-    <button class="secondary" onclick="signup()">Create account</button>
+    <div id="authError" style="color:#ff6b6b;font-size:14px;margin:8px 0;"></div>
+
+    <button type="button" onclick="login()">Login</button>
+    <button type="button" class="secondary" onclick="signup()">Create account</button>
   </div>
 </section>
 
-<!-- ================= CHAT ================= -->
 <section id="chatScreen" class="screen">
   <header class="chat-header">
     <div>
       <div id="chatName">Chat</div>
-      <div id="chatStatus">offline</div>
+      <div id="chatStatus">online</div>
     </div>
     <span class="material-icons" onclick="logout()">logout</span>
   </header>
