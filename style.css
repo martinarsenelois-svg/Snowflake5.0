@@ -1,75 +1,74 @@
-/* =========================
-   GLOBAL
-========================= */
 * {
   box-sizing: border-box;
   font-family: 'Inter', system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
   background: #0b141a;
   color: #e9edef;
-  height: 100vh;
-  overflow: hidden;
+  height: 100%;
 }
 
+/* ================= SCREENS ================= */
 .screen {
   display: none;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100%;
+  width: 100%;
 }
 
 .screen.active {
-  display: flex;
-  flex-direction: column;
+  display: block;
 }
 
-/* =========================
-   AUTH SCREEN
-========================= */
+/* ================= AUTH ================= */
+#authScreen {
+  padding: 40px 16px;
+}
+
 .auth-box {
-  margin: auto;
-  width: 90%;
   max-width: 360px;
+  margin: 0 auto;
   background: #111b21;
-  padding: 2rem;
+  padding: 24px;
   border-radius: 18px;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,.6);
 }
 
 .auth-box h1 {
-  margin: 0;
-  font-size: 2rem;
+  margin: 0 0 6px;
+  font-size: 28px;
 }
 
 .auth-box p {
   color: #8696a0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
 }
 
 .auth-box input {
   width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
   border-radius: 12px;
   border: none;
   background: #0b141a;
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
+  outline: none;
 }
 
 .auth-box button {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border-radius: 12px;
   border: none;
   background: #00a884;
   color: #000;
   font-weight: 600;
-  margin-top: 6px;
-  font-size: 15px;
+  font-size: 16px;
+  margin-top: 8px;
 }
 
 .auth-box button.secondary {
@@ -77,21 +76,24 @@ body {
   color: #8696a0;
 }
 
-/* =========================
-   CHAT HEADER
-========================= */
-.chat-header {
+/* ================= CHAT ================= */
+#chatScreen {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-header {
   padding: 12px 14px;
   background: #111b21;
   border-bottom: 1px solid #1f2c33;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #chatName {
   font-weight: 600;
-  font-size: 15px;
 }
 
 #chatStatus {
@@ -99,21 +101,10 @@ body {
   color: #8696a0;
 }
 
-.chat-header .material-icons {
-  font-size: 22px;
-  cursor: pointer;
-}
-
-/* =========================
-   MESSAGES
-========================= */
 #messages {
   flex: 1;
   padding: 12px;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
 }
 
 .message {
@@ -121,74 +112,49 @@ body {
   padding: 8px 12px;
   border-radius: 16px;
   font-size: 14px;
-  line-height: 1.4;
-  position: relative;
-  word-wrap: break-word;
+  margin-bottom: 6px;
 }
 
 .message.in {
   background: #1f2c33;
-  align-self: flex-start;
 }
 
 .message.out {
   background: #005c4b;
-  align-self: flex-end;
+  margin-left: auto;
 }
 
 .meta {
-  display: flex;
-  justify-content: flex-end;
-  gap: 4px;
-  margin-top: 4px;
   font-size: 11px;
-  color: #cfd4d7;
+  text-align: right;
+  opacity: 0.7;
 }
 
-.seen {
-  color: #53bdeb;
-}
-
-/* =========================
-   INPUT BAR
-========================= */
+/* ================= INPUT ================= */
 .input-bar {
-  display: flex;
-  align-items: center;
   padding: 8px;
+  display: flex;
+  gap: 8px;
   background: #111b21;
-  border-top: 1px solid #1f2c33;
 }
 
 #messageInput {
   flex: 1;
-  padding: 10px 14px;
+  padding: 12px 14px;
   border-radius: 999px;
   border: none;
   background: #0b141a;
   color: #fff;
-  font-size: 14px;
+  font-size: 15px;
+  outline: none;
 }
 
 .input-bar button {
-  width: 42px;
-  height: 42px;
-  margin-left: 8px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: none;
   background: #00a884;
   color: #000;
   font-size: 18px;
-}
-
-/* =========================
-   SCROLLBAR (MINIMAL)
-========================= */
-#messages::-webkit-scrollbar {
-  width: 3px;
-}
-
-#messages::-webkit-scrollbar-thumb {
-  background: #3b4a54;
-  border-radius: 10px;
 }
